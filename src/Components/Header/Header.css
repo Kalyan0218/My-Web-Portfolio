@@ -1,0 +1,95 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d0d0d;
+  padding: 0 60px;
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.options a {
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.options a:hover {
+  opacity: 1;
+}
+
+.cv-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  background: #27AE78;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.cv-btn:hover {
+  background: #1e9467;
+  transform: translateY(-1px);
+  opacity: 1 !important;
+}
+
+.cv-btn-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.contact-btn {
+  cursor: pointer;
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 50px;
+  padding: 8px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-btn:hover {
+  background: #ffffff;
+  color: #0d0d0d;
+}

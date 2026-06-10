@@ -1,0 +1,120 @@
+.home-container {
+  width: 100%;
+  background-color: black;
+  
+}
+
+#home {
+  scroll-margin-top: 70px;
+}
+
+.home {
+  position: relative;
+  height: 600px;
+  display: flex;
+  overflow: hidden;
+}
+
+.home-green-panel {
+  position: relative;
+  background-color: #2d2d2f;;
+    clip-path: polygon(
+    0 0,        
+    75% 0,    
+    65% 100%,   
+    0% 100%    
+  );
+  width: 65%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 80px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.home-dark-panel {
+  position: absolute;
+ 
+  right: 0;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  background-color: #0d0d0d;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 380px;
+}
+
+.home-greeting {
+  
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.01em;
+  font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 28px; 
+}
+
+.home-name {
+  
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 48px; 
+}
+
+.home-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 36px 0;
+  letter-spacing: 0.01em;
+}
+
+/* Social icon buttons */
+.social-icons {
+  display: flex;
+  gap: 14px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+   background: #27AE78;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-btn:hover {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Hero photo */
+.home-image {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
