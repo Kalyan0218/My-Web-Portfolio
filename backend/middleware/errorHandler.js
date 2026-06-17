@@ -5,8 +5,8 @@
 const errorHandler = (err, _req, res, _next) => {
   console.error("[Error]", err.message || err);
 
-  // Nodemailer auth failures give a helpful message
-  if (err.code === "EAUTH") {
+  // Resend API key/auth issues
+  if (err.name === "validation_error" || err.statusCode === 401 || err.statusCode === 403) {
     return res.status(500).json({
       success: false,
       message:

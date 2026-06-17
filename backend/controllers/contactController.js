@@ -1,31 +1,16 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-// ── Nodemailer transporter — Gmail ────────────────────────────────────────────
+// ── Resend client ─────────────────────────────────────────────────────────────
 //
 // Setup:
-//   1. Enable 2-Step Verification on the Gmail account
-//      (myaccount.google.com → Security → 2-Step Verification).
-//   2. Go to myaccount.google.com → Security → App passwords.
-//   3. Generate an App Password for "Mail" and paste it into .env as EMAIL_PASS.
-//   4. Set EMAIL_USER to your full Gmail address.
-//
-// "self-signed certificate in certificate chain" error?
-//   This usually means antivirus software (Kaspersky, ESET, Avast, etc.) or a
-//   corporate proxy is intercepting HTTPS traffic with its own certificate.
-//   Best fix: disable "SSL/TLS scanning" / "Scan encrypted connections" for
-//   Node.js in your antivirus settings.
-//   Local-dev-only workaround: set NODE_TLS_REJECT_UNSAFE=true in .env to
-//   trust the intercepted cert. DO NOT use this in production.
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: process.env.NODE_TLS_REJECT_UNSAFE !== "true",
-  },
-});
+//   1. Sign up at resend.com (free tier: 100 emails/day, 3,000/month).
+//   2. Verify a sending domain (Resend → Domains → Add Domain) and add the
+//      DNS records they give you. Until verified, you can only send from
+//      onboarding@resend.dev and only TO your own Resend account email.
+//   3. Resend → API Keys → Create API Key → paste into .env as RESEND_API_KEY.
+//   4. Set EMAIL_FROM to an address on your verified domain, e.g.
+//      "Portfolio <contact@yourdomain.com>".
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ── Controller ────────────────────────────────────────────────────────────────
 const submitContact = async (req, res, next) => {
@@ -33,16 +18,17 @@ const submitContact = async (req, res, next) => {
 
   try {
     // Email to portfolio owner
-    await transporter.sendMail({
-      from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: process.env.EMAIL_FROM,
       to: process.env.RECIPIENT_EMAIL,
+      replyTo: email,
       subject: `New message from ${name}`,
       html: buildOwnerEmail({ name, email, phone, message }),
     });
 
     // Auto-reply to sender
-    await transporter.sendMail({
-      from: `"Kalyan Naicker" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: process.env.EMAIL_FROM,
       to: email,
       subject: "Thanks for reaching out!",
       html: buildAutoReplyEmail(name),
