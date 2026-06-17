@@ -1,12 +1,4 @@
 import React, { useState } from "react";
-import ContactLink from "./ContactLink";
-
-const contactLinks = [
-  { icon: "✉",  label: "Email",    value: "kalyannaicker18@gmail.com",                            href: "mailto:kalyannaicker18@gmail.com" },
-  { icon: "☏",  label: "Phone",    value: "+27 076 603 2589",                                     href: "tel:+270766032589" },
-  { icon: "in", label: "LinkedIn", value: "https://www.linkedin.com/in/kalyan-naicker-72624b208/", href: "https://www.linkedin.com/in/kalyan-naicker-72624b208/" },
-  { icon: "GH", label: "GitHub",   value: "https://github.com/Kalyan0218",                        href: "https://github.com/Kalyan0218" },
-];
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
