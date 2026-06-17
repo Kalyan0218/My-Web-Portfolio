@@ -1,35 +1,29 @@
 const nodemailer = require("nodemailer");
 
-// ── Nodemailer transporter — Microsoft 365 / Outlook ─────────────────────────
+// ── Nodemailer transporter — Gmail ────────────────────────────────────────────
 //
-// Works for:
-//   • Personal Outlook accounts  (@outlook.com / @hotmail.com / @live.com)
-//       host: smtp-mail.outlook.com  port: 587
-//   • Microsoft 365 work/school accounts  (@yourdomain.com via M365)
-//       host: smtp.office365.com      port: 587
+// Setup:
+//   1. Enable 2-Step Verification on the Gmail account
+//      (myaccount.google.com → Security → 2-Step Verification).
+//   2. Go to myaccount.google.com → Security → App passwords.
+//   3. Generate an App Password for "Mail" and paste it into .env as EMAIL_PASS.
+//   4. Set EMAIL_USER to your full Gmail address.
 //
-// Setup — personal Outlook:
-//   1. Go to account.microsoft.com → Security → Advanced security options.
-//   2. Enable "Two-step verification".
-//   3. Under "App passwords" create a new one and paste it into .env as EMAIL_PASS.
-//   4. Set EMAIL_USER to your full Outlook address.
-//
-// Setup — Microsoft 365 work account:
-//   Your IT admin must allow SMTP AUTH for your mailbox:
-//   Microsoft 365 admin centre → Users → Active users → select user →
-//   Mail tab → Manage email apps → tick "Authenticated SMTP".
-//   Then use your M365 email and password (or App Password if MFA is on).
+// "self-signed certificate in certificate chain" error?
+//   This usually means antivirus software (Kaspersky, ESET, Avast, etc.) or a
+//   corporate proxy is intercepting HTTPS traffic with its own certificate.
+//   Best fix: disable "SSL/TLS scanning" / "Scan encrypted connections" for
+//   Node.js in your antivirus settings.
+//   Local-dev-only workaround: set NODE_TLS_REJECT_UNSAFE=true in .env to
+//   trust the intercepted cert. DO NOT use this in production.
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || "smtp-mail.outlook.com",
-  port: parseInt(process.env.EMAIL_PORT || "587", 10),
-  secure: false,        // STARTTLS on port 587 — do NOT set true (that is SSL/465)
-  requireTLS: true,     // force STARTTLS upgrade; reject plain-text fallback
+  service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
   tls: {
-    ciphers: "SSLv3",   // required by some Outlook SMTP endpoints
+    rejectUnauthorized: process.env.NODE_TLS_REJECT_UNSAFE !== "true",
   },
 });
 
