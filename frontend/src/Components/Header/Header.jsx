@@ -14,9 +14,9 @@ function Header() {
       </div>
 
       <nav className="options">
-        <a onClick={() => scrollToSection('about')}>About me</a>
-        <a onClick={() => scrollToSection('skills')}>Skills</a>
-        <a onClick={() => scrollToSection('portfolio')}>Portfolio</a>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('about')}>About me</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('skills')}>Skills</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('portfolio')}>Portfolio</button>
 
         <a
           className="cv-btn"
