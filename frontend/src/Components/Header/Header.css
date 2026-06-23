@@ -44,6 +44,28 @@
   opacity: 1;
 }
 
+.nav-link{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  background: #27AE78;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+
+}
+  .nav-link:hover {
+  opacity: 1;
+}
 .cv-btn {
   display: flex;
   align-items: center;
