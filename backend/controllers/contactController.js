@@ -1,23 +1,12 @@
 const { Resend } = require("resend");
 
-// ── Resend client ─────────────────────────────────────────────────────────────
-//
-// Setup:
-//   1. Sign up at resend.com (free tier: 100 emails/day, 3,000/month).
-//   2. Verify a sending domain (Resend → Domains → Add Domain) and add the
-//      DNS records they give you. Until verified, you can only send from
-//      onboarding@resend.dev and only TO your own Resend account email.
-//   3. Resend → API Keys → Create API Key → paste into .env as RESEND_API_KEY.
-//   4. Set EMAIL_FROM to an address on your verified domain, e.g.
-//      "Portfolio <contact@yourdomain.com>".
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ── Controller ────────────────────────────────────────────────────────────────
 const submitContact = async (req, res, next) => {
   const { name, email, phone, message } = req.body;
 
   try {
-    // Email to portfolio owner
     await resend.emails.send({
       from: process.env.EMAIL_FROM,
       to: process.env.RECIPIENT_EMAIL,
@@ -26,7 +15,6 @@ const submitContact = async (req, res, next) => {
       html: buildOwnerEmail({ name, email, phone, message }),
     });
 
-    // Auto-reply to sender
     await resend.emails.send({
       from: process.env.EMAIL_FROM,
       to: email,
@@ -43,7 +31,6 @@ const submitContact = async (req, res, next) => {
   }
 };
 
-// ── Email templates ───────────────────────────────────────────────────────────
 function buildOwnerEmail({ name, email, phone, message }) {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:auto;padding:24px;border:1px solid #e5e7eb;border-radius:8px;">

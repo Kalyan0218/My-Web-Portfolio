@@ -1,7 +1,4 @@
-/**
- * Validates the incoming contact form payload.
- * Runs before the controller so the controller can assume clean data.
- */
+
 const validateContact = (req, res, next) => {
   const { name, email, message } = req.body;
   const errors = [];
@@ -22,7 +19,6 @@ const validateContact = (req, res, next) => {
     return res.status(400).json({ success: false, errors });
   }
 
-  // Sanitise — strip leading/trailing whitespace
   req.body.name = name.trim();
   req.body.email = email.trim().toLowerCase();
   req.body.message = message.trim();

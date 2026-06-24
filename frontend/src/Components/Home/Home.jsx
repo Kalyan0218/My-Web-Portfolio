@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import './Home.css';
 
 function Home({ img, name, about, gname, Ido, github, linkedin }) {
@@ -6,11 +7,38 @@ function Home({ img, name, about, gname, Ido, github, linkedin }) {
     <div className="home-container" id="home">
       <div className="home">
 
-        {/* Green left panel */}
+        {/* Left panel */}
         <div className="home-green-panel">
           <div className="home-content">
-            <h2 className="home-greeting">Hi, I am</h2>
-            <h1 className="home-name">{gname}</h1>
+
+            <h2 className="home-greeting">
+              <TypeAnimation
+                sequence={[
+                  'Hi, I am',
+                  1000,
+                  'Hello, I am',
+                  1000,
+                  'Hey, I am',
+                  1000,
+                ]}
+                speed={50}
+                deletionSpeed={65}
+                repeat={Infinity}
+                style={{ display: 'inline-block' }}
+              />
+            </h2>
+
+            <h1 className="home-name">
+              <TypeAnimation
+                sequence={[
+                  500,
+                  gname,
+                ]}
+                speed={40}
+                cursor={false}
+              />
+            </h1>
+
             <h3 className="home-title">Front-end Developer / UI Designer</h3>
 
             <div className="social-icons">
@@ -31,6 +59,7 @@ function Home({ img, name, about, gname, Ido, github, linkedin }) {
                 </svg>
               </a>
             </div>
+
           </div>
         </div>
 

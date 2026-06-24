@@ -6,7 +6,7 @@ const INITIAL_FORM = { name: "", email: "", phone: "", message: "" };
 
 function Contact() {
   const [formData, setFormData]   = useState(INITIAL_FORM);
-  const [status, setStatus]       = useState("idle"); // idle | loading | success | error
+  const [status, setStatus]       = useState("idle"); 
   const [feedback, setFeedback]   = useState("");
 
   const handleChange = (e) => {
